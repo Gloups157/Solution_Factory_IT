@@ -1,13 +1,16 @@
 from typing import List
 from models.node import Node
 from models.edge import Edge
+from models.station import Station
 
 metro_data_path = "Version1/metro.txt"
+station_data_path = "Version1/pospoints.txt"
 
 nodes: List[Node] = []
 edges: List[Edge] = []
+stations: List[Station] = []
 
-def load_metro_datas():
+def load_metro_data():
     with open(metro_data_path, "r", encoding="utf-8") as f:
         start_data = False
         for line in f.readlines():
@@ -52,15 +55,22 @@ def load_metro_datas():
                 time = int(split_line[3])
                 edges.append(Edge(nodes[first_node_num], nodes[second_node_num], time))
 
+def load_stations_data():
+    with open(station_data_path, "r", encoding="utf-8") as f:
+        for line in f.readlines():
+            split_line = line.split(";")
+            x = float(split_line[0])
+            y = float(split_line[1])
+            station_name = split_line[2].replace("@", " ")
+            stations.append(Station(station_name, x, y))
 
 
 
 def main():
-    load_metro_datas()
-    for node in nodes:
-        node.print_node()
-    for edge in edges:
-        edge.print_edge()
+    load_metro_data()
+    load_stations_data()
+    for s in stations:
+        s.print_station()
 
 if __name__ == '__main__':
     main()

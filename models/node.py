@@ -1,3 +1,5 @@
+from typing import List
+
 class Node:
     def __init__(self, num: int, name: str, num_line: str, terminus: bool, connection: int):
         self.num: int = num # num_sommet
@@ -5,6 +7,11 @@ class Node:
         self.num_line: str = num_line # numéro_ligne
         self.terminus: bool = terminus # si_terminus
         self.connection: int = connection #branchement
+        self.neighbors: List[Node] = []
+
+    def add_neighbor(self, other: Node):
+        self.neighbors.append(other)
+        other.neighbors.append(self)
 
     def print_node(self):
        print(f"{self.num} {self.name} {self.num_line} {self.terminus} {self.connection}")

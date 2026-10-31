@@ -1,3 +1,5 @@
+import heapq
+import math
 from typing import List
 
 from models.graph import Graph
@@ -38,3 +40,27 @@ def find_root(parent: List[int], num: int) -> int:
     while parent[num] != num:
         num = parent[num]
     return num
+
+def dijkstra(graph: Graph, starting_node: Node, ending_node: Node) -> tuple[float, List[Node]]:
+    n = len(graph.nodes)
+    times = [math.inf] * n
+    previous_nodes = [None] * n
+
+    times[starting_node.num] = 0
+    queue = [(0, starting_node.num)]
+
+    while queue:
+        current_time, current_num = heapq.heappop(queue)
+        if current_num == ending_node.num:
+            break
+        if current_time > times[current_num]:
+            continue
+        # Need to implement the logic to explore neighbors
+
+    path = []
+    current_num = ending_node.num
+    while current_num is not None:
+        path.append(graph.nodes[current_num])
+        current_num = previous_nodes[current_num]
+
+    return times[ending_node.num], path

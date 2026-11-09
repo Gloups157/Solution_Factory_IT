@@ -2,11 +2,12 @@ from typing import List
 from models.node import Node
 from models.edge import Edge
 from models.station import Station
-
+import os
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 # A
 
-metro_data_path = "Version1/metro.txt"
-station_data_path = "Version1/pospoints.txt"
+metro_data_path = os.path.join(ROOT_DIR, "Version1", "metro.txt")
+station_data_path = os.path.join(ROOT_DIR, "Version1", "pospoints.txt")
 
 def load_metro_data():
     nodes: List[Node] = []

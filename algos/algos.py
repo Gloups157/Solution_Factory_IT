@@ -55,7 +55,12 @@ def dijkstra(graph: Graph, starting_node: Node, ending_node: Node) -> tuple[floa
             break
         if current_time > times[current_num]:
             continue
-        # Need to implement the logic to explore neighbors
+        for neighbor_num, edge_time in graph.adjacency[current_num]:
+            new_time = current_time + edge_time
+            if new_time < times[neighbor_num]:
+                times[neighbor_num] = new_time
+                previous_nodes[neighbor_num] = current_num
+                heapq.heappush(queue, (new_time, neighbor_num))
 
     path = []
     current_num = ending_node.num

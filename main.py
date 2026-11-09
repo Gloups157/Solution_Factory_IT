@@ -18,6 +18,7 @@ def main():
     print(len(tree), total_time)
 
     time, path = dijkstra(graph, graph.nodes[0], graph.nodes[16])
+    print(time)
     for node in path:
         node.print_node()
 

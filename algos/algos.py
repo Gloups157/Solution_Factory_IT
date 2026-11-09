@@ -67,5 +67,5 @@ def dijkstra(graph: Graph, starting_node: Node, ending_node: Node) -> tuple[floa
     while current_num is not None:
         path.append(graph.nodes[current_num])
         current_num = previous_nodes[current_num]
-
+    path.reverse()
     return times[ending_node.num], path
